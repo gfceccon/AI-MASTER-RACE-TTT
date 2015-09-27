@@ -32,18 +32,19 @@ public class Game
 		
 		MenuItem bestFirst = new MenuItem("Best-First");
 		MenuItem depth = new MenuItem("Breadth Search");
-		MenuItem bot = new MenuItem("BOT FIGHT");
+		//MenuItem bot = new MenuItem("BOT FIGHT");
 		bestFirst.setOnAction(event -> {
 			game.startGame(bestFirstStrategy);
 		});
 		depth.setOnAction(event -> {
 			game.startGame(breadthStrategy);
 		});
-		bot.setOnAction(event -> {
-			game.startGame(breadthStrategy, bestFirstStrategy);
-		});
+//		bot.setOnAction(event -> {
+//			game.startGame(breadthStrategy, bestFirstStrategy);
+//		});
 		Menu menu = new Menu("Options");
-		menu.getItems().addAll(bestFirst, depth, bot);
+		//menu.getItems().addAll(bestFirst, depth, bot);
+		menu.getItems().addAll(bestFirst, depth);
 		
 		Menu aboutMenu = new Menu("About");
 		MenuItem instructionsMenuItem = new MenuItem("Rules");
