@@ -128,6 +128,7 @@ public class BestFirst implements CpuStrategy
 		this.cpuSymbol = cpuSymbol;
 
 		byte x = 0, y = 0;
+		double bestScore = Double.NEGATIVE_INFINITY;
 
 		State currentState = null;
 		byte[][] currentBoard = board;
@@ -166,11 +167,8 @@ public class BestFirst implements CpuStrategy
 							s = State.getPooledState(currentBoard, i, j, currentState.initialMoveX,
 									currentState.initialMoveY, !currentState.playerMove);
 						else
-						{
 							s = State.getPooledState(currentBoard, i, j, i, j, false);
-							x = i;
-							y = j;
-						}
+						
 						if (s.playerMove)
 						{
 							s.board[i][j] = playerSymbol;
@@ -182,7 +180,12 @@ public class BestFirst implements CpuStrategy
 							s.score = getVerticalScore(currentBoard, i, j) + getHorizontalScore(currentBoard, i, j)
 									+ getDiagonalUpScore(currentBoard, i, j) + getDiagonalDownScore(currentBoard, i, j)
 									+ getPositionScore(currentBoard, i, j);
-							;
+							if(currentState == null && s.score > bestScore)
+							{
+								x = i;
+								y = j;
+								bestScore = s.score;
+							}
 						}
 						queue.add(s);
 					}
